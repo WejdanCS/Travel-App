@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require("cors");
 const bodyParser = require("body-parser")
 const app = express()
-const { getCityInfo } = require('./APIs');
+const { getCityInfo, getWeatherStatus, getCityPic } = require('./APIs');
 app.use(cors())
 app.use(bodyParser.json())
     // to use url encoded values
@@ -18,9 +18,18 @@ app.listen(8081, function() {
 });
 
 app.post("/postCityInfo", async(req, res) => {
+    const city = req.body.city;
+
 
     // console.log(req.body.city);
-    var cityInfo = await getCityInfo(req.body.city);
-    res.send(cityInfo)
+    var cityInfo = await getCityInfo(city);
+    // res.send(cityInfo)
+
+    // vaer 
+    var weatherInfo = await getWeatherStatus(cityInfo, "20-02-2021");
+    console.log(weatherInfo)
+    var weatherInfo = await getCityPic(city);
+
+    res.send(weatherInfo)
 
 });
