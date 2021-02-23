@@ -10,27 +10,35 @@
 </head>
 
 <body>
-    <header class="navigation-menu">
-        <ul class="nav-menu">
-            <li class="home">Home</li>
-            <li class="pictures-cities">pictures from Cities</li>
-            <li class="search-city">Search about City</li>
-        </ul>
-    </header>
-    <main class="content">
-        <h1>Travel app</h1>
-        <form action="">
-            <label for="cityName">City: </label>
-            <input type="text" id="City" name="cityName"><br>
-            <input type="date" id="tripDate" name="tripDate">
-            <input type="submit" name="submit" value="submit">
-        </form>
-    </main>
-    <footer>
-        <h6>Made with &hearts; by Wejdan</h6>
-    </footer>
+    <div class="travel-app">
 
-    <!-- <script src="../index.js"></script> -->
+        <header class="navigation-menu">
+            <ul class="nav-menu">
+                <li class="home"><a href="#">Home</a></li>
+                <li class="pictures-cities"><a href="#">pictures from Cities</a></li>
+                <li class="search-city"><a href="#">Search about City</a></li>
+            </ul>
+        </header>
+        <main class="content">
+            <h1 class="travel-app-title">Travel app</h1>
+            <form class="trip-form" onsubmit="return Client.handleSubmit(event)">
+                <label for="cityName" class="cityName">Enter City: </label>
+                <input type="text" id="cityTextinput" name="cityName" placeholder="london"><br>
+                <label for="dateLabel" class="dateLabel">Enter Date: </label>
+                <input type="date" id="tripDate" name="tripDate">
+                <input type="submit" name="submit" value="submit" class="submit-btn" onsubmit="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+            </form>
+            <section class="results">
+                <div id="error-message"></div>
+            </section>
+        </main>
+
+        <footer>
+            <h6>Made with &hearts; by Wejdan</h6>
+        </footer>
+
+    </div>
+    <!-- <script src=" ../index.js "></script> -->
 
 
 </body>

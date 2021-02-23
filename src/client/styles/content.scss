@@ -1,0 +1,43 @@
+@import "./styles.scss";
+.content {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: yellow;
+    .travel-app-title {
+        font-size: 35px;
+        color: rgb(88, 73, 73);
+    }
+    .trip-form {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        // margin: 15px 0px;
+        * {
+            margin: 3px 0px;
+        }
+        #cityTextinput {
+            width: 250px;
+            height: 30px;
+        }
+        .dateLabel {
+            // text-align: left;
+        }
+        #tripDate {
+            width: 250px;
+            height: 30px;
+        }
+        .submit-btn {
+            // text-align: center;
+            align-self: center;
+            // text-justify: center;
+            background-color: $primary-color;
+            color: $secondary-color;
+            padding: 10px 0px;
+            border: none;
+            border-radius: 15px;
+            width: 120px;
+        }
+    }
+}

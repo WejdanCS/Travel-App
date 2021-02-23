@@ -1,0 +1,12 @@
+@import "./styles.scss";
+footer {
+    background-color: $primary-color;
+    height: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h6 {
+        text-align: center;
+        color: $secondary-color;
+    }
+}

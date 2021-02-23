@@ -1,0 +1,41 @@
+$primary-color:rgb(72, 136, 219);
+$secondary-color:rgb(241, 241, 241);
+$third-color: rgb(88, 73, 73);
+$font-family: Georgia,
+'Times New Roman',
+Times,
+serif;
+* {
+    font-family: $font-family;
+    color: $third-color;
+    font-size: 16px;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: $primary-color;
+}
+
+.submit-btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: $primary-color;
+}
+
+.travel-app {
+    display: flex;
+    flex-direction: column;
+    header,
+    main {
+        margin-bottom: 50px;
+    }
+}
+
+#error-message {
+    margin-top: 15px;
+    color: rgb(241, 52, 52);
+}

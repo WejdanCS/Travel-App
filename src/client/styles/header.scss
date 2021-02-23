@@ -1,5 +1,21 @@
-$primary-color:rgb(224, 70, 70);
-.navigation-menu .nav-menu {
-    width: 100%;
+@import "./styles.scss";
+// Header styles
+.navigation-menu {
+    width: 100vw;
     background-color: $primary-color;
+    color: $secondary-color;
+    font-family: $font-family;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    // gap: px;
+    // padding: 0px 40px;
+    .nav-menu {
+        li {
+            margin: 10px 0px;
+            // padding: 0px 100%;
+            width: 100vw;
+        }
+    }
 }

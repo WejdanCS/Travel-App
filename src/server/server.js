@@ -17,19 +17,15 @@ app.listen(8081, function() {
     console.log('Example app listening on port 8081!')
 });
 
-app.post("/postCityInfo", async(req, res) => {
+app.post("/postTripInfo", async(req, res) => {
     const city = req.body.city;
-
-
-    // console.log(req.body.city);
+    let date = req.body.date;
     var cityInfo = await getCityInfo(city);
-    // res.send(cityInfo)
+    var weatherInfo = await getWeatherStatus(cityInfo, date);
+    // console.log(weatherInfo)
 
-    // vaer 
-    var weatherInfo = await getWeatherStatus(cityInfo, "20-02-2021");
-    console.log(weatherInfo)
-    var weatherInfo = await getCityPic(city);
+    var cityPics = await getCityPic(city);
 
-    res.send(weatherInfo)
+    res.send({ weatherInfo, cityPics })
 
 });
