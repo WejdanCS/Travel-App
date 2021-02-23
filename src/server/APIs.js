@@ -104,8 +104,9 @@ var getCityPic = async(city) => {
         picsUrl = [];
 
         selectedPics.forEach(pic => {
-            picsUrl.push(pic.pageURL);
-            console.log(pic.pageURL)
+            // console.log(pic)
+            picsUrl.push(pic.webformatURL);
+            console.log(pic.webformatURL)
 
         });
         return {

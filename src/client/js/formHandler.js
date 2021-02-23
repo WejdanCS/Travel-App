@@ -72,8 +72,35 @@ function handleSubmit(event) {
 
             }
             console.log(cityPics.picsUrl[0])
+            var cardsContiner = document.querySelector('.pics-cards-container');
+            if (cardsContiner.length != 0) {
+                cardsContiner.innerHTML = "";
+            }
+            // cardsContiner
+            let cardContainer = document.createDocumentFragment();
+            // create cards and set images
+            for (var i = 0; i < cityPics.picsUrl.length; i++) {
+                console.log(cityPics.picsUrl[i]);
+                let card = document.createElement("div");
+                card.classList.toggle("card");
+                card.classList.add('card');
 
+                // image
+                var image = document.createElement("img");
+                // set class to image
+                image.setAttribute("class", 'city-pic');
+                // set the src for image
+                // image.setAttribute("src", `${cityPics.picsUrl[i]}`);
+                image.src = cityPics.picsUrl[i];
+                // set alt to image
+                image.setAttribute("alt", `city${city}`);
+                card.appendChild(image);
 
+                cardContainer.appendChild(card);
+            }
+            cardsContiner.appendChild(cardContainer);
+            // document.appendChild(cardsContiner);
+            console.log(cardsContiner)
         });
 
 
