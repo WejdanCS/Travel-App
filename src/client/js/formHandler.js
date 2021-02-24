@@ -46,6 +46,7 @@ function handleSubmit(event) {
 }
 
 function getWeatherStatus(weatherInfo) {
+    console.log(weatherInfo)
     if (weatherInfo.date == "within current week") {
         var weatherStatusDiv = document.querySelector(".weather-status");
         var statusTitle = document.createElement("h3");
@@ -90,14 +91,15 @@ function getWeatherStatus(weatherInfo) {
 
 function getCityPictures(cityPics, city) {
     var cardsContiner = document.querySelector('.pics-cards-container');
+    // console.log(cardContainer)
     // cardsContiner
     let cardContainer = document.createDocumentFragment();
     // create cards and set images
     for (var i = 0; i < cityPics.picsUrl.length; i++) {
-        console.log(cityPics.picsUrl[i]);
+        // console.log(cityPics.picsUrl[i]);
         let card = document.createElement("div");
         card.classList.toggle("card");
-        card.classList.add('card');
+        // card.classList.add('card');
 
         // image
         var image = document.createElement("img");
@@ -121,4 +123,4 @@ function clearData() {
     document.querySelector(".pics-cards-container").innerHTML = "";
 
 }
-export { handleSubmit }
+export { handleSubmit, getWeatherStatus, getCityPictures }

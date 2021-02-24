@@ -1,12 +1,13 @@
 const dotenv = require("dotenv");
 dotenv.config();
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 
 // Define global variables
 const weatherBitAPIKey = process.env.WEATHER_BIT_API_KEY;
 const weatherBitAPI_Url = 'https://api.weatherbit.io/v2.0/';
 
 var getWeatherStatus = async(cityInfo, date) => {
+    // console.log(date)
     // check if the date in the current week
     var isInCurrentWeek = checkTripDate(date);
     if (isInCurrentWeek) {
