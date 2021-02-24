@@ -30,7 +30,6 @@ var getCityPic = async(city) => {
         };
 
     } catch (error) {
-        // console.log(`ERROR:${error}`);
         return { errorMessage: `Error:${error.message}` };
 
     }

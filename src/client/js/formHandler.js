@@ -19,7 +19,6 @@ function handleSubmit(event) {
                 const data = await result.json();
                 return data;
             } catch (error) {
-                console.log(`ERROR:${error.message}`);
                 document.querySelector(".error-message").innerHTML = error.message;
             }
         }
@@ -46,7 +45,7 @@ function handleSubmit(event) {
 }
 
 function getWeatherStatus(weatherInfo) {
-    console.log(weatherInfo)
+
     if (weatherInfo.date == "within current week") {
         var weatherStatusDiv = document.querySelector(".weather-status");
         var statusTitle = document.createElement("h3");
@@ -74,7 +73,6 @@ function getWeatherStatus(weatherInfo) {
         weatherStatus.innerHTML = `min_temp: ${weatherInfo.min_temp} C<br> max_temp: ${weatherInfo.max_temp} C <br>wind_dir: ${weatherInfo.wind_dir}`;
         withinWeekDiv.appendChild(weatherStatus);
         weatherStatusDiv.appendChild(withinWeekDiv);
-        console.log(weatherInfo.wind_dir)
     } else {
         var weatherStatusDiv = document.querySelector(".weather-status");
         var afterCurrentWeek = document.createElement("div");
@@ -91,22 +89,17 @@ function getWeatherStatus(weatherInfo) {
 
 function getCityPictures(cityPics, city) {
     var cardsContiner = document.querySelector('.pics-cards-container');
-    // console.log(cardContainer)
     // cardsContiner
     let cardContainer = document.createDocumentFragment();
     // create cards and set images
     for (var i = 0; i < cityPics.picsUrl.length; i++) {
-        // console.log(cityPics.picsUrl[i]);
         let card = document.createElement("div");
         card.classList.toggle("card");
-        // card.classList.add('card');
-
         // image
         var image = document.createElement("img");
         // set class to image
         image.setAttribute("class", 'city-pic');
         // set the src for image
-        // image.setAttribute("src", `${cityPics.picsUrl[i]}`);
         image.src = cityPics.picsUrl[i];
         // set alt to image
         image.setAttribute("alt", `city${city}`);

@@ -7,7 +7,6 @@ const geoNameApiUserName = process.env.GEO_USER_NAME;
 const geoNamesBase_Url = 'http://api.geonames.org/';
 
 var getCityInfo = async(city) => {
-    // console.log(city)
     var geoNamesAPI_Url = `${geoNamesBase_Url}searchJSON?&q=${city}&username=${geoNameApiUserName}`;
 
     try {
@@ -21,7 +20,6 @@ var getCityInfo = async(city) => {
         };
 
     } catch (error) {
-        // console.log(`ERROR:${error}`);
         return { errorMessage: `Error:${error}` };
 
     }
