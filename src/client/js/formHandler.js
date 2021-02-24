@@ -4,7 +4,7 @@ var { checkTripDate } = require("./dateChecker");
 function handleSubmit(event) {
     event.preventDefault()
         // clear error message text
-    document.getElementById("error-message").innerHTML = "";
+    document.querySelectorAll(".error-message").innerHTML = "";
     // check inputs if null or not
     let city = document.getElementById('cityTextinput').value;
     // console.log(city)
@@ -26,21 +26,13 @@ function handleSubmit(event) {
             return data;
         } catch (error) {
             console.log(`ERROR:${error.message}`);
-            document.getElementById("error-message").innerHTML = error.message;
+            document.querySelector(".error-message").innerHTML = error.message;
         }
     }
     if (inputChecker(city) & inputChecker(date)) {
         // post the day and city to server
         console.log(city)
         console.log(date)
-            // let d = new Date();
-            // let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
-            // console.log(d.getDate())
-            // var isInCurrentWeek = checkTripDate(date);
-            // console.log(isInCurrentWeek)
-
-
-
         postTripInfo("http://localhost:8081/postTripInfo", {
             city,
             date
@@ -53,23 +45,53 @@ function handleSubmit(event) {
                 console.log(weatherInfo.windDir)
                 console.log(weatherInfo.temp)
                 console.log(weatherInfo.weather)
+                var weatherStatusDiv = document.querySelector(".weather-status");
+                var statusTitle = document.createElement("h3");
+                statusTitle.setAttribute("class", "status-title");
+                statusTitle.innerHTML = "Weather within Week:";
+                weatherStatusDiv.appendChild(statusTitle);
 
+                var withinWeekDiv = document.createElement("div");
+                withinWeekDiv.setAttribute("class", "withinWeek");
+                var weatherStatus = document.createElement("p");
+                weatherStatus.setAttribute("class", "weather-status-result");
+                weatherStatus.innerHTML = `temp: ${weatherInfo.temp} C<br> weather: ${weatherInfo.weather} <br>windDir: ${weatherInfo.windDir}`;
+
+                withinWeekDiv.appendChild(weatherStatus);
+                weatherStatusDiv.appendChild(withinWeekDiv);
             } else if (weatherInfo.date == "before current week") {
-                /**
-                 * 
-                 *   wind_spd: weatherStatus.wind_spd,
-                snow: weatherStatus.snow,
-                wind_dir: weatherStatus.wind_dir,
-                max_wind_dir: weatherStatus.max_wind_dir,
-                min_temp: weatherStatus.min_temp,
-                max_temp: weatherStatus.max_temp,
-                 */
+
+                var weatherStatusDiv = document.querySelector(".weather-status");
+                if (weatherStatusDiv.length != 0) {
+                    weatherStatusDiv.innerHTML = "";
+                }
+                var statusTitle = document.createElement("h3");
+                statusTitle.setAttribute("class", "status-title");
+                statusTitle.innerHTML = "Weather before current Week:";
+                weatherStatusDiv.appendChild(statusTitle);
+
+                var withinWeekDiv = document.createElement("div");
+                withinWeekDiv.setAttribute("class", "beforeCurrentWeek");
+                var weatherStatus = document.createElement("p");
+                weatherStatus.setAttribute("class", "weather-status-result");
+                weatherStatus.innerHTML = `min_temp: ${weatherInfo.min_temp} C<br> max_temp: ${weatherInfo.max_temp} C <br>wind_dir: ${weatherInfo.wind_dir}`;
+
+                withinWeekDiv.appendChild(weatherStatus);
+                weatherStatusDiv.appendChild(withinWeekDiv);
                 console.log(weatherInfo.wind_dir)
+
 
             } else {
                 // console.log(weatherInfo.errorMessage);
-                document.getElementById("error-message").innerHTML = weatherInfo.errorMessage;
+                //  <div class="afterCurrentWeek">
 
+                // </div>
+                // <div id="error-message"></div>
+                var afterCurrentWeek = document.querySelector(".afterCurrentWeek");
+                var errorMessage = document.createElement("div");
+                errorMessage.setAttribute("class", "error-message");
+                errorMessage.innerHTML = weatherInfo.errorMessage;
+                afterCurrentWeek.appendChild(errorMessage);
             }
             console.log(cityPics.picsUrl[0])
             var cardsContiner = document.querySelector('.pics-cards-container');
@@ -106,48 +128,8 @@ function handleSubmit(event) {
 
     } else {
         // console.log("ffff")
-        document.getElementById("error-message").innerHTML = "please check your inputs";
+        document.querySelector(".error-message").innerHTML = "please check your inputs";
     }
-
-
-
-    // return true if url is valid
-    // var isValid = Client.checkArticleUrl(articleUrl);
-    // const postArticleUrl = async(url = '', data = {}) => {
-
-    //     const result = await fetch(url, {
-    //         method: 'POST',
-    //         cache: "no-cache",
-    //         mode: "cors",
-    //         credentials: 'same-origin',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data),
-    //     });
-    //     try {
-    //         const data = await result.json();
-    //         return data;
-    //     } catch (error) {
-    //         console.log(`ERROR:${error.message}`);
-    //         document.getElementById("results").innerHTML = error.message;
-    //     }
-    // }
-
-    // if (isValid) {
-    //     postArticleUrl("http://localhost:8081/PostArticleUrl", {
-    //         articleUrl
-    //     }).then(function(data) {
-    //         document.getElementById("scoreTag").innerHTML = `Score Tag: ${data.score_tag}`;
-    //         document.getElementById("agreement").innerHTML = `Agreement: ${data.agreement}`;
-    //         document.getElementById("subjectivity").innerHTML = `Subjectivity: ${data.subjectivity}`;
-    //         document.getElementById("confidence").innerHTML = `Confidence: ${data.confidence}`;
-    //         document.getElementById("irony").innerHTML = `Irony: ${data.irony}`;
-
-
-    //     });
-    // } else {
-    //     alert("please enter valid url")
-
-    // }
 }
 
 

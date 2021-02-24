@@ -1,61 +1,131 @@
-@import "./styles.scss";
-.content {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // background-color: yellow;
-    .travel-app-title {
-        font-size: 35px;
-        color: rgb(88, 73, 73);
-    }
-    .trip-form {
+    @import "./styles.scss";
+    .content {
+        margin-top: 15px;
         display: flex;
         flex-direction: column;
-        // align-items: center;
-        // margin: 15px 0px;
-        * {
-            margin: 3px 0px;
+        align-items: center;
+        // background-color: yellow;
+        .travel-app-title {
+            font-size: 35px;
+            color: rgb(88, 73, 73);
         }
-        #cityTextinput {
-            width: 250px;
-            height: 30px;
+        .trip-form {
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            // margin: 15px 0px;
+            * {
+                margin: 3px 0px;
+            }
+            #cityTextinput {
+                width: 250px;
+                height: 30px;
+            }
+            .dateLabel {
+                // text-align: left;
+            }
+            #tripDate {
+                width: 250px;
+                height: 30px;
+            }
+            .submit-btn {
+                // text-align: center;
+                align-self: center;
+                // text-justify: center;
+                background-color: $primary-color;
+                color: $secondary-color;
+                padding: 10px 0px;
+                border: none;
+                border-radius: 15px;
+                width: 120px;
+            }
         }
-        .dateLabel {
-            // text-align: left;
-        }
-        #tripDate {
-            width: 250px;
-            height: 30px;
-        }
-        .submit-btn {
-            // text-align: center;
-            align-self: center;
-            // text-justify: center;
-            background-color: $primary-color;
-            color: $secondary-color;
-            padding: 10px 0px;
-            border: none;
-            border-radius: 15px;
-            width: 120px;
-        }
-    }
-    .results {
-        .pics-cards-container {
-            display: grid;
-            gap: 15px;
-            .card {
-                background-color: rgba(177, 177, 177, 0.548);
-                border-radius: 20px;
-                box-shadow: 5px 2px 12px -2px rgba(172, 175, 176, 0.5);
-                width: 100%;
-                height: 200px;
-                .city-pic {
+        .results {
+            .weather-status {
+                .status-title {
+                    font-size: 20px;
+                    text-align: center;
+                }
+                .withinWeek,
+                .beforeCurrentWeek,
+                .afterCurrentWeek {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+            }
+            .pics-cards-container {
+                margin-top: 15px;
+                display: grid;
+                gap: 15px;
+                .card {
+                    background-color: rgba(177, 177, 177, 0.548);
                     border-radius: 20px;
-                    width: 80vw;
+                    box-shadow: 5px 2px 12px -2px rgba(172, 175, 176, 0.5);
+                    width: 100%;
                     height: 200px;
+                    .city-pic {
+                        border-radius: 20px;
+                        width: 80vw;
+                        height: 200px;
+                    }
                 }
             }
         }
     }
-}
+    
+    @media (min-width:768px) {
+        .content {
+            .results {
+                .pics-cards-container {
+                    // margin-top: 15px;
+                    display: grid;
+                    grid-template-rows: auto auto;
+                    grid-template-columns: auto auto;
+                    gap: 15px;
+                    .card {
+                        // background-color: rgba(177, 177, 177, 0.548);
+                        // border-radius: 20px;
+                        // box-shadow: 5px 2px 12px -2px rgba(172, 175, 176, 0.5);
+                        width: 44vw;
+                        height: 200px;
+                        .city-pic {
+                            border-radius: 20px;
+                            width: 44vw;
+                            height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media (min-width:900px) {
+        .content {
+            .results {
+                .pics-cards-container {
+                    // margin-top: 15px;
+                    display: grid;
+                    grid-template-rows: auto auto auto auto;
+                    grid-template-columns: auto auto auto auto;
+                    gap: 15px;
+                    .card {
+                        width: 20vw;
+                        height: 200px;
+                        .city-pic {
+                            width: 20vw;
+                            height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // @media (min-width:1200px) {
+    //     // .card-grid{
+    //     //     grid-template-rows: auto;
+    //     //     grid-template-columns: auto auto auto auto;
+    //     //     gap: 20px 0px;
+    //     //     grid-template-areas: "card1 card2 card3 card4";        
+    //     // }
+    // }

@@ -13,11 +13,11 @@
     <div class="travel-app">
 
         <header class="navigation-menu">
-            <ul class="nav-menu">
-                <li class="home"><a href="#">Home</a></li>
-                <li class="pictures-cities"><a href="#">pictures from Cities</a></li>
-                <li class="search-city"><a href="#">Search about City</a></li>
-            </ul>
+            <div class="nav-menu">
+                <a class="home" href="#">Home</a>
+                <a class="pictures-cities" href="#">pictures from Cities</a>
+                <a class="search-city" href="#">Search about City</a>
+            </div>
         </header>
         <main class="content">
             <h1 class="travel-app-title">Travel app</h1>
@@ -29,18 +29,10 @@
                 <input type="submit" name="submit" value="submit" class="submit-btn" onsubmit="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
             </form>
             <section class="results">
-                <div id="error-message"></div>
+                <div class="error-message"></div>
+                <div class="weather-status">
+                </div>
                 <div class="pics-cards-container">
-                    <!-- <div class="card">
-                        <img class="city-pic" src="https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_1280.jpg" alt="city image">
-                    </div>
-                    <div class="card">
-                        <img class="city-pic" src="https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_1280.jpg" alt="city image">
-                    </div>
-                    <div class="card">
-                        <img class="city-pic" src="https://cdn.pixabay.com/photo/2014/11/13/23/34/palace-530055_1280.jpg" alt="city image">
-                    </div>
- -->
                 </div>
             </section>
         </main>
@@ -50,9 +42,6 @@
         </footer>
 
     </div>
-    <!-- <script src=" ../index.js "></script> -->
-
-
 </body>
 
 </html>
