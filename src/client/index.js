@@ -1,6 +1,5 @@
 import { handleSubmit } from './js/formHandler';
-console.log("Hello")
-
+import { inputChecker } from './js/emptyChecker';
 
 import "./styles/header.scss"
 import "./styles/content.scss"
@@ -10,4 +9,5 @@ import './styles/footer.scss'
 
 export {
     handleSubmit,
+    inputChecker,
 }
