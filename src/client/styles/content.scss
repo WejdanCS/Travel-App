@@ -5,65 +5,129 @@
         flex-direction: column;
         align-items: center;
         // background-color: yellow;
-        .travel-app-title {
-            font-size: 35px;
-            color: rgb(88, 73, 73);
-        }
-        .trip-form {
+        .saved-trips-section {
             display: flex;
             flex-direction: column;
-            // align-items: center;
-            // margin: 15px 0px;
-            * {
-                margin: 3px 0px;
-            }
-            #cityTextinput {
-                width: 250px;
-                height: 30px;
-            }
-            .dateLabel {
-                // text-align: left;
-            }
-            #tripDate {
-                width: 250px;
-                height: 30px;
-            }
-            .submit-btn {
-                // text-align: center;
+            gap: 15px 0px;
+            .saved-trips-title {
+                font-size: 26px;
+                font-weight: bold;
                 align-self: center;
-                // text-justify: center;
-                background-color: $primary-color;
-                color: $secondary-color;
-                padding: 10px 0px;
-                border: none;
-                border-radius: 15px;
-                width: 120px;
             }
         }
-        .results {
+        .form-section {
+            width: 85vw;
+            border-radius: 25px;
+            // text-align: center;
+            display: flex;
+            flex-direction: column;
+            background-color: $third-color;
+            padding: 20px 0px;
+            gap: 24px 35px;
+            margin: 15px 0px;
+            .travel-app-title {
+                text-align: center;
+                font-size: 35px;
+                // color: rgb(88, 73, 73);
+                color: $secondary-color;
+            }
+            .trip-form {
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                // padding: 5px;
+                box-sizing: border-box;
+                // align-items: center;
+                * {
+                    margin: 3px 0px;
+                }
+                #cityTextinput {
+                    width: 250px;
+                    height: 30px;
+                }
+                .dateLabel,
+                .cityName {
+                    color: $secondary-color;
+                    // text-align: left;
+                }
+                #tripDate {
+                    width: 250px;
+                    height: 30px;
+                }
+                .submit-btn {
+                    // text-align: center;
+                    align-self: center;
+                    // text-justify: center;
+                    // background-color: $primary-color;
+                    // color: $secondary-color;
+                    background-color: $secondary-color;
+                    padding: 10px 0px;
+                    color: $primary-color;
+                    border: none;
+                    border-radius: 15px;
+                    width: 120px;
+                }
+            }
+        }
+        .results,
+        .saved-trip {
             .weather-status {
+                background-color: $primary-color;
+                width: 85vw;
+                border-radius: 10px;
+                padding: 15px 0px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px 5px;
+                margin: auto;
+                margin-bottom: 20px;
                 .status-title {
-                    font-size: 20px;
+                    font-size: 14px;
+                    font-weight: bold;
                     text-align: center;
+                    color: $secondary-color;
                 }
                 .withinWeek,
                 .beforeCurrentWeek,
                 .afterCurrentWeek {
                     margin-top: 10px;
                     text-align: center;
+                    .weather-status-result {
+                        color: $secondary-color;
+                        line-height: 25px;
+                    }
+                }
+                .save-trip {
+                    align-self: flex-end;
+                    float: right;
+                    color: $secondary-color;
+                    margin: -9px 6px;
+                    font-size: 30px;
+                }
+                .save-trip:hover {
+                    transform: rotate(60deg);
+                }
+                .city-pic-result {
+                    width: 80%;
+                    height: 260px;
+                    align-self: center;
+                    border-radius: 5%;
                 }
             }
+        }
+        .city-pics-list {
             .pics-cards-container {
                 margin-top: 15px;
+                align-self: center;
                 display: grid;
                 gap: 15px;
                 .card {
                     background-color: rgba(177, 177, 177, 0.548);
                     border-radius: 20px;
                     box-shadow: 5px 2px 12px -2px rgba(172, 175, 176, 0.5);
-                    width: 100%;
+                    // width: 100%;
                     height: 200px;
-                    margin: 0px 5%;
+                    // margin: 0px 5%;
                     .city-pic {
                         border-radius: 20px;
                         width: 80vw;
@@ -76,7 +140,26 @@
     
     @media (min-width:768px) {
         .content {
-            .results {
+            .form-section {
+                width: 50vw;
+            }
+            .results,
+            .saved-trip {
+                .weather-status {
+                    flex-direction: row-reverse;
+                    .city-pic-result {
+                        width: 50%;
+                        margin: 5px 20px;
+                    }
+                    .save-trip {
+                        align-self: start;
+                    }
+                    .withinWeek {
+                        align-self: center;
+                    }
+                }
+            }
+            .city-pics-list {
                 .pics-cards-container {
                     // margin-top: 15px;
                     display: grid;
@@ -102,7 +185,18 @@
     
     @media (min-width:900px) {
         .content {
-            .results {
+            .results,
+            .saved-trip {
+                .weather-status {
+                    width: 80%;
+                    align-self: center;
+                    .city-pic-result {
+                        width: 50%;
+                        height: 50%;
+                    }
+                }
+            }
+            .city-pics-list {
                 .pics-cards-container {
                     // margin-top: 15px;
                     display: grid;
@@ -121,12 +215,3 @@
             }
         }
     }
-    
-    // @media (min-width:1200px) {
-    //     // .card-grid{
-    //     //     grid-template-rows: auto;
-    //     //     grid-template-columns: auto auto auto auto;
-    //     //     gap: 20px 0px;
-    //     //     grid-template-areas: "card1 card2 card3 card4";        
-    //     // }
-    // }

@@ -23,6 +23,7 @@ app.post("/postTripInfo", async(req, res) => {
     var cityInfo = await getCityInfo(city);
     var weatherInfo = await getWeatherStatus(cityInfo, date);
     var cityPics = await getCityPic(city);
+    console.log(cityPics);
     res.send({ weatherInfo, cityPics })
 
 });

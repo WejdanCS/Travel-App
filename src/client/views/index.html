@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel app</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -20,18 +21,26 @@
             </div>
         </header>
         <main class="content">
-            <h1 class="travel-app-title">Travel app</h1>
-            <form class="trip-form" onsubmit="return Client.handleSubmit(event)">
-                <label for="cityName" class="cityName">Enter City: </label>
-                <input type="text" id="cityTextinput" name="cityName" placeholder="london"><br>
-                <label for="dateLabel" class="dateLabel">Enter Date: </label>
-                <input type="date" id="tripDate" name="tripDate">
-                <input type="submit" name="submit" value="submit" class="submit-btn" onsubmit="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
-            </form>
+            <section class="saved-trips-section">
+
+            </section>
+
+            <section class="form-section">
+                <h1 class="travel-app-title">Travel app</h1>
+                <form class="trip-form" onsubmit="return Client.handleSubmit(event)">
+                    <label for="cityName" class="cityName">Enter City: </label>
+                    <input type="text" id="cityTextinput" name="cityName" placeholder="london"><br>
+                    <label for="dateLabel" class="dateLabel">Enter Date: </label>
+                    <input type="date" id="tripDate" name="tripDate">
+                    <input type="submit" name="submit" value="submit" class="submit-btn" onsubmit="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                </form>
+            </section>
             <section class="results">
-                <div class="error-message"></div>
-                <div class="weather-status">
-                </div>
+
+            </section>
+            <section class="error-message">
+            </section>
+            <section class="city-pics-list">
                 <div class="pics-cards-container">
                 </div>
             </section>
@@ -44,12 +53,12 @@
     </div>
     <script>
         // Check that service workers are supported
-        if ('serviceWorker' in navigator) {
-            // Use the window load event to keep the page load performant
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js');
-            });
-        }
+        // if ('serviceWorker' in navigator) {
+        //     // Use the window load event to keep the page load performant
+        //     window.addEventListener('load', () => {
+        //         navigator.serviceWorker.register('/service-worker.js');
+        //     });
+        // }
     </script>
 </body>
 
