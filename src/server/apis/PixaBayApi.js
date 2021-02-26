@@ -16,7 +16,7 @@ var getCityPic = async(city) => {
         var response = await fetch(picRequestUrl);
         var allPics = await response.json();
         var selectedPics = allPics.hits;
-        picsUrl = [];
+        var picsUrl = [];
 
         selectedPics.forEach(pic => {
             picsUrl.push(pic.webformatURL);
