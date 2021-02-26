@@ -10,3 +10,6 @@ The travel app is a website where user can input the city which he wants to visi
   - run server: `npm run start`
   - run development environment: `npm run build-dev`
   - run unit testing using jest package using: `npm run test`
+# Extended Features: 
+  - Display beautiful pictures around the city
+  - Post trip information to server and display it on the screen 
