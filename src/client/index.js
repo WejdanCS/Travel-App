@@ -1,6 +1,10 @@
 import { handleSubmit } from './js/formHandler';
-import { inputChecker } from './js/emptyChecker';
+import { isNotEmpty } from './js/emptyChecker';
 import { saveTrip } from "./js/saveTrip";
+import { postData } from "./js/postData";
+import { displayWeatherStatus } from "./js/tripInfo";
+import { displayErrorMsg } from "./js/displayErrorMsg";
+
 
 import "./styles/header.scss"
 import "./styles/content.scss"
@@ -10,6 +14,9 @@ import './styles/footer.scss'
 
 export {
     handleSubmit,
-    inputChecker,
-    saveTrip
+    isNotEmpty,
+    saveTrip,
+    postData,
+    displayWeatherStatus,
+    displayErrorMsg
 }

@@ -4,80 +4,81 @@ function handleSubmit(event) {
     clearData();
     let city = document.getElementById('cityTextinput').value;
     let date = document.getElementById("tripDate").value;
-
-    const postTripInfo = async(url = '', data = {}) => {
-
-            const result = await fetch(url, {
-                method: 'POST',
-                cache: "no-cache",
-                mode: "cors",
-                credentials: 'same-origin',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            try {
-                const data = await result.json();
-                return data;
-            } catch (error) {
-                document.querySelector(".error-message").innerHTML = error.message;
-            }
-        }
-        // check inputs if null or not
-    if (Client.inputChecker(city) & Client.inputChecker(date)) {
+    // check inputs if empty or not
+    if (Client.isNotEmpty(city) & Client.isNotEmpty(date)) {
         // post the day and city to server
-        postTripInfo("http://localhost:8081/postTripInfo", {
+        Client.postData("http://localhost:8081/postTripInfo", {
             city,
             date,
         }).then(function(data) {
             const weatherInfo = data.weatherInfo;
             const cityPics = data.cityPics;
             // update UI
-
-
-            //  get weatherData
-            getWeatherStatus(weatherInfo, cityPics, city, date);
+            //  check weather status and return information
+            var tripInfo = checkWeatherStatus(weatherInfo, cityPics.picsUrl[0], city, date);
             //  get City pictures
-            // getCityPictures(cityPics, city)
-            if (weatherInfo.date != "after current week") {
+            if (tripInfo.type != "afterCurrentWeek") {
+                Client.displayWeatherStatus(tripInfo, ".results");
                 getCityPictures(cityPics, city);
+            } else {
+
+                Client.displayErrorMsg(tripInfo.errorMessage);
             }
-
         });
-
-
-
     } else {
-        document.querySelector(".error-message").innerHTML = "please check your inputs";
+        // display error message if input|inputs are empty
+        Client.displayErrorMsg("please check your inputs");
     }
 }
 
-function getWeatherStatus(weatherInfo, cityPics, city, date) {
+/**
+ * 
+ * @param {object:contains weather information} weatherInfo 
+ * @param {variable contain picture Url} cityPic 
+ * @param  city 
+ * @param date 
+ * returns object 
+ */
+function checkWeatherStatus(weatherInfo, cityPic, city, date) {
 
     if (weatherInfo.date == "within current week") {
-        var weatherStatusInfo = {
+        var tripInfo = {
             type: "withinWeek",
             statusTitle: `Weather within Week in ${city} on ${date}:`,
             weatherStatus: `Temperature: ${weatherInfo.temp} C<br> Weather: ${weatherInfo.weather} <br>Wind direction: ${weatherInfo.windDir}`,
-            cityPics,
+            cityPic,
         };
-        displayWeatherStatus(weatherStatusInfo);
+        return tripInfo;
+        // Client.displayWeatherStatus(tripInfo, ".results");
 
     } else if (weatherInfo.date == "before current week") {
-        var weatherStatusInfo = {
+        var tripInfo = {
             type: "beforeCurrentWeek",
             statusTitle: `Weather before current Week in ${city} on ${date}:`,
             weatherStatus: `Minimum temperature: ${weatherInfo.min_temp} C<br> Maximum temperature: ${weatherInfo.max_temp} C`,
-            cityPics,
+            cityPic,
         };
-        displayWeatherStatus(weatherStatusInfo);
+        return tripInfo;
+        // Client.displayWeatherStatus(tripInfo, ".results");
     } else {
-        var errorMessage = document.querySelector(".error-message");
-        errorMessage.innerHTML = weatherInfo.errorMessage;
+
+        var tripInfo = {
+            type: "afterCurrentWeek",
+            errorMessage: weatherInfo.errorMessage,
+
+        };
+        // var errorMessage = document.querySelector(".error-message");
+        // errorMessage.innerHTML = weatherInfo.errorMessage;
+        return tripInfo;
     }
 
 
 }
-
+/**
+ * 
+ * @param {all pictures which returend from PixaBay Api} cityPics 
+ * @param city 
+ */
 function getCityPictures(cityPics, city) {
     // pics-list-title
     // <section class="city-pics-list">
@@ -128,39 +129,4 @@ function clearData() {
 
 }
 
-// display weather status information on the screen
-function displayWeatherStatus(weatherStatusInfo) {
-    var results = document.querySelector(".results");
-    var weatherStatusDiv = document.createElement("div");
-    weatherStatusDiv.setAttribute("class", "weather-status");
-    var saveTripInfo = document.createElement("i");
-    saveTripInfo.setAttribute("class", "material-icons save-trip");
-    saveTripInfo.innerHTML = "add";
-    weatherStatusDiv.appendChild(saveTripInfo);
-    var withinWeekDiv = document.createElement("div");
-    withinWeekDiv.setAttribute("class", weatherStatusInfo.type);
-    var statusTitle = document.createElement("h3");
-    statusTitle.setAttribute("class", "status-title");
-    statusTitle.innerHTML = weatherStatusInfo.statusTitle;
-    withinWeekDiv.appendChild(statusTitle);
-
-    var weatherStatus = document.createElement("p");
-    weatherStatus.setAttribute("class", "weather-status-result");
-    weatherStatus.innerHTML = weatherStatusInfo.weatherStatus;
-    withinWeekDiv.appendChild(weatherStatus);
-    weatherStatusDiv.appendChild(withinWeekDiv);
-    var cityImg = document.createElement("img");
-    cityImg.setAttribute("class", "city-pic-result");
-    cityImg.setAttribute("src", `${weatherStatusInfo.cityPics.picsUrl[0]}`);
-    weatherStatusDiv.appendChild(cityImg);
-    results.appendChild(weatherStatusDiv);
-    saveTripInfo.addEventListener("click", function(event) {
-        Client.saveTrip(event, weatherStatusDiv);
-    });
-
-}
-
-
-
-
-export { handleSubmit, getWeatherStatus, getCityPictures }
+export { handleSubmit, checkWeatherStatus, getCityPictures }

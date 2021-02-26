@@ -23,7 +23,12 @@ app.post("/postTripInfo", async(req, res) => {
     var cityInfo = await getCityInfo(city);
     var weatherInfo = await getWeatherStatus(cityInfo, date);
     var cityPics = await getCityPic(city);
-    console.log(cityPics);
     res.send({ weatherInfo, cityPics })
 
 });
+app.post("/SaveTripInfo", async(req, res) => {
+    // here we can post user input to DB..for example save it to MongoDB.
+    var tripInfo = req.body.tripInfo;
+    res.send(tripInfo);
+
+})

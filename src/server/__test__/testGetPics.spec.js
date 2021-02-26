@@ -1,6 +1,6 @@
 // Import the js file to test
 import 'babel-polyfill';
-import { getCityPic } from "../src/server/apis/PixaBayApi";
+import { getCityPic } from "../apis/PixaBayApi";
 
 describe("Testing the getCityPic functionality", () => {
     var city = "london";

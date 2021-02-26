@@ -1,5 +1,5 @@
 // check if city is empty
-var inputChecker = (input) => {
+var isNotEmpty = (input) => {
     if (input === "") {
         return false;
     } else {
@@ -8,5 +8,5 @@ var inputChecker = (input) => {
 }
 
 export {
-    inputChecker
+    isNotEmpty
 }

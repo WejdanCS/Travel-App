@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import { getWeatherStatus } from "../src/server/apis/weatherBitApi";
+import { getWeatherStatus } from "../apis/weatherBitApi";
 
 describe("Testing the weather status functionality", () => {
     // The test() function has two arguments - a string description, and an actual test as a callback function.  
