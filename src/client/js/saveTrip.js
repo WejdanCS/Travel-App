@@ -13,6 +13,9 @@ function saveTrip(event, weatherStatusDiv) {
     var savedTrip = document.createElement("div");
     savedTrip.setAttribute("class", "saved-trip");
     var cln = weatherStatusDiv.cloneNode(true);
+    var deleteAddIcon = cln.querySelector("i");
+    cln.removeChild(deleteAddIcon);
+
     savedTrip.appendChild(cln);
 
     savedTripSection.appendChild(savedTrip);

@@ -39,10 +39,10 @@ var getWeatherStatus = async(cityInfo, date) => {
                 var weatherStatus = weatherDetails.data[0];
                 return {
                     date: "before current week",
-                    wind_spd: weatherStatus.wind_spd,
-                    snow: weatherStatus.snow,
-                    wind_dir: weatherStatus.wind_dir,
-                    max_wind_dir: weatherStatus.max_wind_dir,
+                    // wind_spd: weatherStatus.wind_spd,
+                    // snow: weatherStatus.snow,
+                    // wind_dir: weatherStatus.wind_dir,
+                    // max_wind_dir: weatherStatus.max_wind_dir,
                     min_temp: weatherStatus.min_temp,
                     max_temp: weatherStatus.max_temp,
                 };

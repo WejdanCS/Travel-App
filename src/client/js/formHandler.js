@@ -37,7 +37,11 @@ function handleSubmit(event) {
             //  get weatherData
             getWeatherStatus(weatherInfo, cityPics, city, date);
             //  get City pictures
-            getCityPictures(cityPics, city)
+            // getCityPictures(cityPics, city)
+            if (weatherInfo.date != "after current week") {
+                getCityPictures(cityPics, city);
+            }
+
         });
 
 
@@ -50,63 +54,22 @@ function handleSubmit(event) {
 function getWeatherStatus(weatherInfo, cityPics, city, date) {
 
     if (weatherInfo.date == "within current week") {
-        var results = document.querySelector(".results");
-        var weatherStatusDiv = document.createElement("div");
-        weatherStatusDiv.setAttribute("class", "weather-status");
-        var saveTripInfo = document.createElement("i");
-        saveTripInfo.setAttribute("class", "material-icons save-trip");
-        saveTripInfo.innerHTML = "add";
-        weatherStatusDiv.appendChild(saveTripInfo);
-        var withinWeekDiv = document.createElement("div");
-        withinWeekDiv.setAttribute("class", "withinWeek");
-        var statusTitle = document.createElement("h3");
-        statusTitle.setAttribute("class", "status-title");
-        statusTitle.innerHTML = `Weather within Week in ${city} on ${date}:`;
-        withinWeekDiv.appendChild(statusTitle);
-
-        var weatherStatus = document.createElement("p");
-        weatherStatus.setAttribute("class", "weather-status-result");
-        weatherStatus.innerHTML = `temp: ${weatherInfo.temp} C<br> weather: ${weatherInfo.weather} <br>windDir: ${weatherInfo.windDir}`;
-        withinWeekDiv.appendChild(weatherStatus);
-        weatherStatusDiv.appendChild(withinWeekDiv);
-        var cityImg = document.createElement("img");
-        cityImg.setAttribute("class", "city-pic-result");
-        cityImg.setAttribute("src", `${cityPics.picsUrl[0]}`);
-        weatherStatusDiv.appendChild(cityImg);
-        results.appendChild(weatherStatusDiv);
-        saveTripInfo.addEventListener("click", function(event) {
-            Client.saveTrip(event, weatherStatusDiv);
-        });
+        var weatherStatusInfo = {
+            type: "withinWeek",
+            statusTitle: `Weather within Week in ${city} on ${date}:`,
+            weatherStatus: `Temperature: ${weatherInfo.temp} C<br> Weather: ${weatherInfo.weather} <br>Wind direction: ${weatherInfo.windDir}`,
+            cityPics,
+        };
+        displayWeatherStatus(weatherStatusInfo);
 
     } else if (weatherInfo.date == "before current week") {
-
-        var results = document.querySelector(".results");
-        var weatherStatusDiv = document.createElement("div");
-        weatherStatusDiv.setAttribute("class", "weather-status");
-        var saveTripInfo = document.createElement("i");
-        saveTripInfo.setAttribute("class", "material-icons save-trip");
-        saveTripInfo.innerHTML = "add";
-        weatherStatusDiv.appendChild(saveTripInfo);
-        var beforeCurrentWeek = document.createElement("div");
-        beforeCurrentWeek.setAttribute("class", "beforeCurrentWeek");
-        var statusTitle = document.createElement("h3");
-        statusTitle.setAttribute("class", "status-title");
-        statusTitle.innerHTML = "Weather before current Week:";
-        beforeCurrentWeek.appendChild(statusTitle);
-        var weatherStatus = document.createElement("p");
-        weatherStatus.setAttribute("class", "weather-status-result");
-        weatherStatus.innerHTML = `min_temp: ${weatherInfo.min_temp} C<br> max_temp: ${weatherInfo.max_temp} C <br>wind_dir: ${weatherInfo.wind_dir}`;
-        beforeCurrentWeek.appendChild(weatherStatus);
-        var cityImg = document.createElement("img");
-        cityImg.setAttribute("class", "city-pic-result");
-        cityImg.setAttribute("src", `${cityPics.picsUrl[0]}`);
-        weatherStatusDiv.appendChild(cityImg);
-
-        weatherStatusDiv.appendChild(beforeCurrentWeek);
-        results.appendChild(weatherStatusDiv);
-        saveTripInfo.addEventListener("click", function(event) {
-            Client.saveTrip(event, weatherStatusDiv);
-        });
+        var weatherStatusInfo = {
+            type: "beforeCurrentWeek",
+            statusTitle: `Weather before current Week in ${city} on ${date}:`,
+            weatherStatus: `Minimum temperature: ${weatherInfo.min_temp} C<br> Maximum temperature: ${weatherInfo.max_temp} C`,
+            cityPics,
+        };
+        displayWeatherStatus(weatherStatusInfo);
     } else {
         var errorMessage = document.querySelector(".error-message");
         errorMessage.innerHTML = weatherInfo.errorMessage;
@@ -116,7 +79,16 @@ function getWeatherStatus(weatherInfo, cityPics, city, date) {
 }
 
 function getCityPictures(cityPics, city) {
-    var cardsContiner = document.querySelector('.pics-cards-container');
+    // pics-list-title
+    // <section class="city-pics-list">
+    var cityPicsSection = document.querySelector(".city-pics-list");
+    var cityPicsTitle = document.createElement("h3");
+    cityPicsTitle.innerHTML = `Beautiful pictures in ${city}`;
+    cityPicsTitle.setAttribute("class", "pics-list-title");
+
+    cityPicsSection.appendChild(cityPicsTitle);
+    var cardsContiner = document.createElement("div");
+    cardsContiner.setAttribute("class", "pics-cards-container");
     // cardsContiner
     let cardContainer = document.createDocumentFragment();
     // create cards and set images
@@ -136,12 +108,13 @@ function getCityPictures(cityPics, city) {
         cardContainer.appendChild(card);
     }
     cardsContiner.appendChild(cardContainer);
+    cityPicsSection.appendChild(cardsContiner);
 }
-
+// clear all childrens in the DOM elements
 function clearData() {
     var errorMessage = document.querySelector(".error-message");
     var results = document.querySelector(".results");
-    var cityPics = document.querySelector(".pics-cards-container");
+    var cityPics = document.querySelector(".city-pics-list");
     if (errorMessage.innerHTML != 0) {
         errorMessage.innerHTML = "";
     }
@@ -152,6 +125,38 @@ function clearData() {
         cityPics.innerHTML = "";
 
     }
+
+}
+
+// display weather status information on the screen
+function displayWeatherStatus(weatherStatusInfo) {
+    var results = document.querySelector(".results");
+    var weatherStatusDiv = document.createElement("div");
+    weatherStatusDiv.setAttribute("class", "weather-status");
+    var saveTripInfo = document.createElement("i");
+    saveTripInfo.setAttribute("class", "material-icons save-trip");
+    saveTripInfo.innerHTML = "add";
+    weatherStatusDiv.appendChild(saveTripInfo);
+    var withinWeekDiv = document.createElement("div");
+    withinWeekDiv.setAttribute("class", weatherStatusInfo.type);
+    var statusTitle = document.createElement("h3");
+    statusTitle.setAttribute("class", "status-title");
+    statusTitle.innerHTML = weatherStatusInfo.statusTitle;
+    withinWeekDiv.appendChild(statusTitle);
+
+    var weatherStatus = document.createElement("p");
+    weatherStatus.setAttribute("class", "weather-status-result");
+    weatherStatus.innerHTML = weatherStatusInfo.weatherStatus;
+    withinWeekDiv.appendChild(weatherStatus);
+    weatherStatusDiv.appendChild(withinWeekDiv);
+    var cityImg = document.createElement("img");
+    cityImg.setAttribute("class", "city-pic-result");
+    cityImg.setAttribute("src", `${weatherStatusInfo.cityPics.picsUrl[0]}`);
+    weatherStatusDiv.appendChild(cityImg);
+    results.appendChild(weatherStatusDiv);
+    saveTripInfo.addEventListener("click", function(event) {
+        Client.saveTrip(event, weatherStatusDiv);
+    });
 
 }
 
